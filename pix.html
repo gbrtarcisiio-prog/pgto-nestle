@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="logonestle.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pagamento Pix - Nestlé Comodatos</title>
+    <link rel="stylesheet" href="./dist/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Forçar o corpo a ocupar toda a altura da tela em dispositivos móveis */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Esconder o conteúdo principal em telas maiores que 'md' (desktop) */
+        @media (min-width: 768px) {
+            #main-content {
+                display: none;
+            }
+            #desktop-message {
+                display: flex;
+            }
+        }
+        /* Mostrar o conteúdo principal em telas menores que 'md' (mobile) */
+        @media (max-width: 767px) {
+            #main-content {
+                display: flex;
+            }
+            #desktop-message {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-text-dark relative">
+    <!-- Imagem de Fundo (Visível apenas em Mobile) -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-10 md:hidden" style="background-image: url('background.png');"></div>
+
+    <!-- Mensagem de Bloqueio para Desktop -->
+    <div id="desktop-message" class="hidden md:flex flex-col items-center justify-center h-screen p-8 text-center bg-neutral-light">
+        <h1 class="text-2xl font-bold text-secondary mb-4">Acesso Restrito</h1>
+        <p class="text-lg text-text-dark">Este conteúdo está disponível apenas para acesso via celular.</p>
+        <p class="text-sm text-gray-500 mt-2">Por favor, acesse esta página através de um dispositivo móvel.</p>
+    </div>
+
+    <!-- Conteúdo Principal (Mobile-First) -->
+    <div id="main-content" class="relative z-10 flex flex-col flex-grow w-full max-w-md mx-auto shadow-2xl bg-white rounded-xl overflow-hidden">
+        
+        <!-- Header com Logo -->
+        <header class="relative p-4 flex justify-center items-center shadow-md overflow-hidden h-24">
+            <!-- Camada de Cor Azul (bg-secondary) -->
+            <div class="absolute inset-0 bg-secondary"></div>
+            
+            <!-- Camada da Imagem com Opacidade (50%) -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('header-bg.png');"></div>
+            
+            <!-- Logo (Conteúdo) -->
+            <div class="relative z-10 text-white text-xl font-bold">
+                <img src="logonestle.png" alt="Logo Nestlé Sorvetes" class="h-16">
+            </div>
+        </header>
+
+        <!-- Página Final de Pagamento (Pix) -->
+        <main class="flex flex-col flex-grow p-6 space-y-8 text-center">
+            <h1 class="text-2xl font-extrabold text-primary mt-4">
+                Pagamento via Pix
+            </h1>
+            
+            <p class="text-base text-text-dark leading-relaxed">
+                Utilize a chave Pix (CNPJ) abaixo para realizar o pagamento da <span class="font-bold">taxa de ativação de R$ 1,99</span>..
+            </p>
+
+            <div class="bg-neutral-light p-4 rounded-xl border border-gray-300 shadow-inner">
+                <p class="text-sm font-semibold text-text-dark mb-2">Chave Pix (CNPJ):</p>
+                <div class="flex items-center justify-center space-x-2">
+                    <input type="text" id="pix-key" value="00.000.000/0001-00" readonly class="text-lg font-mono text-secondary bg-white p-2 rounded-lg border border-gray-400 text-center w-full select-all">
+                    <button id="btn-copy-pix" class="p-3 bg-tertiary text-white rounded-lg hover:bg-blue-600 transition duration-150" title="Copiar Chave Pix">
+                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h12a2 2 0 002-2v-2m-4-4l-4 4m0 0l-4-4m4 4V5"></path></svg>
+                    </button>
+                </div>
+                <p id="copy-message" class="text-xs text-primary mt-2 hidden">Chave Pix copiada!</p>
+            </div>
+
+            <p class="text-sm font-semibold text-text-dark leading-relaxed mt-auto">
+                <span class="font-bold">Atenção:</span> Após o pagamento, aguarde a confirmação para liberação imediata do envio do equipamento.
+            </p>
+
+            <a href="#" class="text-xs text-gray-500 hover:text-secondary transition duration-150">
+                Dúvidas sobre o Pix? Clique aqui.
+            </a>
+        </main>
+        <footer class="p-4 text-center text-xs text-gray-400 border-t border-neutral-light">
+            <p>&copy; 2025 Nestlé Sorvetes. Todos os direitos reservados.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

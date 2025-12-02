@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="logonestle.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ativação de Cadastro - Nestlé Comodatos</title>
+    <link rel="stylesheet" href="./dist/output.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Forçar o corpo a ocupar toda a altura da tela em dispositivos móveis */
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        /* Esconder o conteúdo principal em telas maiores que 'md' (desktop) */
+        @media (min-width: 768px) {
+            #main-content {
+                display: none;
+            }
+            #desktop-message {
+                display: flex;
+            }
+        }
+        /* Mostrar o conteúdo principal em telas menores que 'md' (mobile) */
+        @media (max-width: 767px) {
+            #main-content {
+                display: flex;
+            }
+            #desktop-message {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body class="font-sans bg-white text-text-dark relative">
+    <!-- Imagem de Fundo (Visível apenas em Mobile) -->
+    <div class="absolute inset-0 bg-cover bg-center opacity-10 md:hidden" style="background-image: url('background.png');"></div>
+
+    <!-- Mensagem de Bloqueio para Desktop -->
+    <div id="desktop-message" class="hidden md:flex flex-col items-center justify-center h-screen p-8 text-center bg-neutral-light">
+        <h1 class="text-2xl font-bold text-secondary mb-4">Acesso Restrito</h1>
+        <p class="text-lg text-text-dark">Este conteúdo está disponível apenas para acesso via celular.</p>
+        <p class="text-sm text-gray-500 mt-2">Por favor, acesse esta página através de um dispositivo móvel.</p>
+    </div>
+
+    <!-- Conteúdo Principal (Mobile-First) -->
+    <div id="main-content" class="relative z-10 flex flex-col flex-grow w-full max-w-md mx-auto shadow-2xl bg-white rounded-xl overflow-hidden">
+
+        <!-- Header com Logo -->
+        <header class="relative p-4 flex justify-center items-center shadow-md overflow-hidden h-24">
+            <!-- Camada de Cor Azul (bg-secondary) -->
+            <div class="absolute inset-0 bg-secondary"></div>
+            
+            <!-- Camada da Imagem com Opacidade (50%) -->
+            <div class="absolute inset-0 bg-cover bg-center opacity-50" style="background-image: url('header-bg.png');"></div>
+            
+            <!-- Logo (Conteúdo) -->
+            <div class="relative z-10 text-white text-xl font-bold">
+                <img src="logonestle.png" alt="Logo Nestlé Sorvetes" class="h-16">
+            </div>
+        </header>
+
+        <!-- Seção Principal (1º Passo) -->
+        <main id="step-1" class="flex flex-col flex-grow p-6 space-y-8">
+            
+            <h1 class="text-2xl font-extrabold text-secondary text-center mt-4">
+                Cadastro Ativo! Libere seu Equipamento.
+            </h1>
+
+            <section class="bg-neutral-light p-4 rounded-xl border border-gray-200">
+                <p class="text-sm text-text-dark leading-relaxed">
+                    Seu cadastro foi <span class="font-bold">aprovado</span>! Para o envio imediato do seu comodato, conclua a ativação com a taxa simbólica.
+                </p>
+            </section>
+
+            <section class="space-y-4">
+                <div class="flex items-start space-x-3">
+                    <span class="text-primary font-bold text-lg">1.</span>
+                    <p class="text-base text-text-dark">
+                        <span class="font-bold">Taxa:</span> A ativação requer o pagamento de <span class="font-bold">R$ 1,99</span> via Pix.
+                    </p>
+                </div>
+                <div class="flex items-start space-x-3">
+                    <span class="text-primary font-bold text-lg">2.</span>
+                    <p class="text-base text-text-dark">
+                        <span class="font-bold">Envio:</span> Após o Pix, seu equipamento será <span class="font-bold">Imediatamente Liberado</span> para envio.
+                    </p>
+                </div>
+            </section>
+
+            
+
+            <!-- Botão CTA Estratégico -->
+            <button id="btn-continue" class="w-full py-4 px-6 bg-primary text-white font-bold text-lg rounded-xl shadow-lg hover:bg-red-700 transition duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50">
+                Quero Concluir a Ativação do Meu Cadastro
+            </button>
+
+        </main>
+
+        <!-- Footer (Opcional, mas bom para credibilidade) -->
+        <footer class="p-4 text-center text-xs text-gray-400 border-t border-neutral-light">
+            <p>&copy; 2025 Nestlé Sorvetes. Todos os direitos reservados.</p>
+        </footer>
+
+    </div>
+
+    <!-- Modais (Ocultos por padrão) -->
+
+    <!-- Modal 1: Formulário de Perguntas -->
+    <div id="modal-form" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm max-h-[90vh] overflow-y-auto transform transition-all duration-300 scale-95 opacity-0" id="modal-form-content">
+            <header class="bg-secondary text-white p-4 flex justify-between items-center">
+                <h2 class="text-lg font-bold">Concluir Ativação</h2>
+                <button class="text-white hover:text-gray-200" onclick="closeModal('modal-form')">&times;</button>
+            </header>
+            <form id="activation-form" class="p-6 space-y-6">
+                
+                <!-- Pergunta 1: Equipamento -->
+                <div>
+                    <label class="block text-sm font-semibold text-text-dark mb-2">1. Qual equipamento você escolheu?</label>
+                    <div class="space-y-3">
+                        <label class="flex items-center p-3 border border-neutral-light rounded-lg cursor-pointer hover:bg-neutral-light transition duration-150">
+                            <input type="radio" name="equipamento" value="Freezer Horizontal" class="form-radio h-4 w-4 text-primary focus:ring-primary" required>
+                            <span class="ml-3 text-sm text-text-dark">Freezer Horizontal</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-neutral-light rounded-lg cursor-pointer hover:bg-neutral-light transition duration-150">
+                            <input type="radio" name="equipamento" value="Freezer Vertical" class="form-radio h-4 w-4 text-primary focus:ring-primary">
+                            <span class="ml-3 text-sm text-text-dark">Freezer Vertical</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-neutral-light rounded-lg cursor-pointer hover:bg-neutral-light transition duration-150">
+                            <input type="radio" name="equipamento" value="Geladeira Expositora" class="form-radio h-4 w-4 text-primary focus:ring-primary">
+                            <span class="ml-3 text-sm text-text-dark">Geladeira Expositora</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-neutral-light rounded-lg cursor-pointer hover:bg-neutral-light transition duration-150">
+                            <input type="radio" name="equipamento" value="Frigobar Pequeno" class="form-radio h-4 w-4 text-primary focus:ring-primary">
+                            <span class="ml-3 text-sm text-text-dark">Frigobar Pequeno</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pergunta 2: Disponibilidade -->
+                <div>
+                    <label class="block text-sm font-semibold text-text-dark mb-2">2. A entrega ocorrerá em até 5 dias úteis após a ativação via App. Você está de acordo e terá disponibilidade para recebimento?</label>
+                    <div class="space-y-6">
+                        <label class="flex items-center p-3 border border-neutral-light rounded-lg cursor-pointer hover:bg-neutral-light transition duration-150">
+                            <input type="radio" name="disponibilidade" value="Sim" class="form-radio h-4 w-4 text-primary focus:ring-primary" required>
+                            <span class="ml-3 text-sm text-text-dark">Sim, estou de acordo</span>
+                        </label>
+                        <label class="flex items-center p-3 border border-neutral-light rounded-lg cursor-pointer hover:bg-neutral-light transition duration-150">
+                            <input type="radio" name="disponibilidade" value="Não" class="form-radio h-4 w-4 text-primary focus:ring-primary">
+                            <span class="ml-3 text-sm text-text-dark">Não</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Pergunta 3: CPF -->
+                <div>
+                    <label for="cpf" class="block text-sm font-semibold text-text-dark mb-2">3. Digite seu CPF</label>
+                    <input type="text" id="cpf" name="cpf" placeholder="000.000.000-00" class="w-full p-3 border border-neutral-light rounded-lg focus:ring-primary focus:border-primary transition duration-150" maxlength="14" required>
+                    <p id="cpf-error" class="text-xs text-primary mt-1 hidden">CPF inválido. Verifique o número digitado.</p>
+                </div>
+
+                <!-- Botão de Continuar -->
+                <button type="submit" class="w-full py-3 px-6 bg-primary text-white font-bold text-base rounded-lg shadow-md hover:bg-red-700 transition duration-300">
+                    Continuar
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 2: Confirmação e Pagamento -->
+    <div id="modal-payment-confirm" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl w-full max-w-sm overflow-hidden transform transition-all duration-300 scale-95 opacity-0" id="modal-payment-confirm-content">
+            <header class="bg-secondary text-white p-4 flex justify-between items-center">
+                <h2 class="text-lg font-bold">Confirmação de Pagamento</h2>
+                <button class="text-white hover:text-gray-200" onclick="closeModal('modal-payment-confirm')">&times;</button>
+            </header>
+            <div class="p-6 space-y-6 text-center">
+                <svg class="w-16 h-16 text-primary mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8v8m0-8c1.11 0 2.08.402 2.592 1M12 8c-1.11 0-2.08.402-2.592 1m2.592-1V3m0 5h.01M12 12h.01M12 16h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                
+                <h3 class="text-xl font-bold text-secondary">Quase lá!</h3>
+                
+                <p class="text-sm text-text-dark leading-relaxed">
+                    Para concluir a ativação e liberar o envio do seu equipamento, é necessário o pagamento da <span class="font-bold">taxa simbólica de R$ 1,99</span> via Pix.
+                </p>
+                
+                <p class="text-sm font-semibold text-primary">
+                    Após o pagamento, o equipamento será <span class="font-bold">Imediatamente Liberado</span> para envio.
+                </p>
+
+                <button id="btn-go-to-pix" class="w-full py-4 px-6 bg-primary text-white font-bold text-lg rounded-xl shadow-lg hover:bg-red-700 transition duration-300 transform hover:scale-[1.02] active:scale-[0.98] focus:outline-none focus:ring-4 focus:ring-primary focus:ring-opacity-50">
+                    Quero Pagar Agora!
+                </button>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script src="script.js"></script>
+</body>
+</html>
